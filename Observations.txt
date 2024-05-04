@@ -1,0 +1,21 @@
+ACCURACY AND LOSS:
+We can observe that over the 10 epochs, accuracy exponentially increases whereas the loss decreases, as can be seen in the graphs. The testing accuracy increases from 53% in epoch 1 to 92% in epoch 10. Both training and validation loss decrease over epochs, suggesting that the model is learning effectively.
+Similarly, there is and increase in accuracy for both training and validation sets, indicating good learning dynamics without significant overfitting.
+
+OVERFITTING:
+When training loss continues to decrease, but validation loss starts to increase, it indicates overfitting; the model performs well on training data but poorly on unseen data. Similarly, if training accuracy is significantly higher than validation accuracy, it implies that the model is memorizing the training data rather than learning to generalize. Here, both testing and training accuracy steadily increase. However, the testing accuracy is lower than training accuracy in most epochs, indicating slight overfitting.
+
+Handling Overfitting:
+Dropout Layers: Dropout works by probabilistically removing, or “dropping out,” inputs to a layer, which may be input variables in the data sample or activations from a previous layer. It has the effect of simulating a large number of networks with very different network structure and, in turn, making nodes in the network generally more robust to the inputs. Dropout layer is a generalization technique that decreases flexibility of your model which can prevent overfitting assuming that your model is flexible enough to handle the task (actually, assuming that your model is more flexible than needed). The model uses a dropout layer with a rate of 0.2 after the dense layers to prevent overfitting by randomly setting a fraction of input units to 0 at each update during training time, which helps to break happenstance correlations in the training data.
+
+Adding More Dropout Layers: Adding more dropout layers of rate 0.3 after the convolutional layers might help reduce overfitting further by providing a more robust feature extraction phase. However, the effectiveness of this additional dropout layer would need to be empirically validated; too much dropout could lead to underfitting, where the model fails to learn sufficient patterns from the data. 
+In this case, our model performs better with the additional dropout layers; the accuracy being 95%. The training and testing accuracies are almost the same, thus avoiding overfitting.
+
+
+SHARE STRUCTURE AND INVARIANCE PROPERTIES:
+Shared Structure: Convolutional Neural Networks (CNNs) utilize shared weights in convolutional filters across the entire input space. This sharing structure property allows the model to detect features like edges and textures regardless of their position in the input image, making the model efficient and reducing the number of parameters.
+
+Invariance: Invariance is a property by which you can recognize an object as an object, even when its appearance varies in some way. It preserves the object's identity, category, etc. across changes in the specifics of the visual input, like relative positions, translation, rotation etc. Through pooling layers (MaxPooling), the model achieves invariance to small shifts and distortions in the input image. This means that once it learns a particular feature in one area of the image, it can recognize the same feature in a different area, making the classification robust to variations in object positioning.
+
+We handled these properties by using kernels and MaxPooling.
+
